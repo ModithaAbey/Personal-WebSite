@@ -327,6 +327,67 @@ color:#ff8c42;
 text-align:center;
 }
 
+.contact-form{
+max-width:480px;
+margin:0 auto;
+background:white;
+padding:35px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.05);
+display:flex;
+flex-direction:column;
+gap:18px;
+text-align:left;
+}
+
+.contact-form label{
+font-size:14px;
+font-weight:500;
+margin-bottom:6px;
+display:block;
+color:#1e293b;
+}
+
+.contact-form input,
+.contact-form textarea{
+width:100%;
+padding:12px 14px;
+border:1.5px solid #e2e8f0;
+border-radius:8px;
+font-size:14px;
+color:#1e293b;
+background:#f8fafc;
+transition:.3s;
+resize:vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus{
+outline:none;
+border-color:#2563eb;
+background:white;
+}
+
+.contact-form textarea{
+min-height:120px;
+}
+
+.contact-form button{
+padding:12px 28px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:8px;
+font-size:15px;
+font-weight:500;
+cursor:pointer;
+transition:.3s;
+}
+
+.contact-form button:hover{
+background:#1d4ed8;
+}
+
 .social-icons{
 display:flex;
 justify-content:center;
@@ -784,6 +845,29 @@ SMD Tours & Transport Service
 <section id="contact" class="contact">
 
 <h2 class="section-title">Contact Me</h2>
+
+<form class="contact-form" action="https://formsubmit.co/modithaabeysinghe0728@gmail.com" method="POST">
+
+<div>
+<label for="name">Name</label>
+<input type="text" id="name" name="name" placeholder="Your name" required>
+</div>
+
+<div>
+<label for="email">Email</label>
+<input type="email" id="email" name="email" placeholder="you@example.com" required>
+</div>
+
+<div>
+<label for="message">Message</label>
+<textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
+</div>
+
+<button type="submit">Send Message</button>
+
+</form>
+
+<br>
 
 <div class="social-icons">
 
