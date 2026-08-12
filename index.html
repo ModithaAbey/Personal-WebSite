@@ -846,7 +846,7 @@ SMD Tours & Transport Service
 
 <h2 class="section-title">Contact Me</h2>
 
-<form class="contact-form" action="https://formsubmit.co/modithaabeysinghe0728@gmail.com" method="POST">
+<form class="contact-form" id="contactForm">
 
 <div>
 <label for="name">Name</label>
@@ -863,7 +863,9 @@ SMD Tours & Transport Service
 <textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
 </div>
 
-<button type="submit">Send Message</button>
+<button type="submit" id="contactSubmitBtn">Send Message</button>
+
+<p id="contactFormStatus" style="font-size:14px;margin-top:5px;"></p>
 
 </form>
 
@@ -906,6 +908,44 @@ const navLinks=document.querySelector(".nav-links");
 menuToggle.onclick=()=>{
 navLinks.classList.toggle("active");
 }
+
+/* CONTACT FORM -> GOOGLE SHEET */
+
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwuHy2sC9TEDpwUJnzxW7h8hqC8DrJ8vyhK3rrlS8uq74o880qT8F9gvaRQAWJhWrWBzQ/exec";
+
+const contactForm = document.getElementById("contactForm");
+const contactSubmitBtn = document.getElementById("contactSubmitBtn");
+const contactFormStatus = document.getElementById("contactFormStatus");
+
+contactForm.addEventListener("submit", function(e){
+e.preventDefault();
+
+contactSubmitBtn.disabled = true;
+contactSubmitBtn.textContent = "Sending...";
+contactFormStatus.textContent = "";
+contactFormStatus.style.color = "#64748b";
+
+const formData = new FormData(contactForm);
+
+fetch(GOOGLE_SCRIPT_URL, {
+method: "POST",
+body: formData
+})
+.then(() => {
+contactFormStatus.textContent = "Thanks! Your message has been sent.";
+contactFormStatus.style.color = "#16a34a";
+contactForm.reset();
+})
+.catch(() => {
+contactFormStatus.textContent = "Something went wrong. Please try again.";
+contactFormStatus.style.color = "#dc2626";
+})
+.finally(() => {
+contactSubmitBtn.disabled = false;
+contactSubmitBtn.textContent = "Send Message";
+});
+
+});
 
 </script>
 
