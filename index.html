@@ -264,6 +264,80 @@ align-items:center;
 justify-content:center;
 }
 
+.edu-grid .card{
+position:relative;
+cursor:pointer;
+}
+
+.edu-grid .card .cert-arrow{
+position:absolute;
+top:15px;
+right:15px;
+width:32px;
+height:32px;
+border-radius:50%;
+background:#2563eb;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:14px;
+transition:.3s;
+}
+
+.edu-grid .card:hover .cert-arrow{
+background:#1d4ed8;
+transform:scale(1.1) rotate(45deg);
+}
+
+/* CERTIFICATE MODAL */
+
+.cert-modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.85);
+z-index:2000;
+align-items:center;
+justify-content:center;
+padding:30px;
+}
+
+.cert-modal.active{
+display:flex;
+}
+
+.cert-modal-content{
+position:relative;
+max-width:90%;
+max-height:90%;
+text-align:center;
+}
+
+.cert-modal-content img{
+max-width:100%;
+max-height:85vh;
+border-radius:10px;
+box-shadow:0 20px 50px rgba(0,0,0,0.4);
+}
+
+.cert-modal-close{
+position:absolute;
+top:-40px;
+right:0;
+color:white;
+font-size:32px;
+cursor:pointer;
+line-height:1;
+}
+
+.cert-modal-close:hover{
+color:#2563eb;
+}
+
 .card p{
 color:#64748b;
 font-size:14px;
@@ -651,7 +725,9 @@ building a successful career in the technology industry
 
 <div class="grid edu-grid">
 
-<div class="card">
+<div class="card" onclick="openCertificate('images/certificates/spcc.jpg')">
+
+<i class="fa-solid fa-arrow-up-right-from-square cert-arrow"></i>
 
 <img src="images/spcc.jfif">
 
@@ -662,7 +738,9 @@ building a successful career in the technology industry
 
 </div>
 
-<div class="card">
+<div class="card" onclick="openCertificate('images/certificates/smmv.jpg')">
+
+<i class="fa-solid fa-arrow-up-right-from-square cert-arrow"></i>
 
 <img src="images/smmv.jfif">
 
@@ -673,9 +751,11 @@ building a successful career in the technology industry
 
 </div>
 
-<div class="card">
+<div class="card" onclick="openCertificate('images/certificates/tfv-basic.jpg')">
 
-<a href="https://technologyforvillage.lk" target="_blank">
+<i class="fa-solid fa-arrow-up-right-from-square cert-arrow"></i>
+
+<a href="https://technologyforvillage.lk" target="_blank" onclick="event.stopPropagation()">
 <img src="images/tfv.jfif">
 </a>
 
@@ -688,9 +768,11 @@ building a successful career in the technology industry
 
 </div>
 
-<div class="card">
+<div class="card" onclick="openCertificate('images/certificates/tfv-html.jpg')">
 
-<a href="https://technologyforvillage.lk" target="_blank">
+<i class="fa-solid fa-arrow-up-right-from-square cert-arrow"></i>
+
+<a href="https://technologyforvillage.lk" target="_blank" onclick="event.stopPropagation()">
 <img src="images/tfv.jfif">
 </a>
 
@@ -703,9 +785,11 @@ building a successful career in the technology industry
 
 </div>
 
-<div class="card">
+<div class="card" onclick="openCertificate('images/certificates/youth.jpg')">
 
-<a href="https://www.nysc.lk" target="_blank">
+<i class="fa-solid fa-arrow-up-right-from-square cert-arrow"></i>
+
+<a href="https://www.nysc.lk" target="_blank" onclick="event.stopPropagation()">
 <img src="images/youth.jpg">
 </a>
 
@@ -718,9 +802,11 @@ building a successful career in the technology industry
 
 </div>
 
-<div class="card">
+<div class="card" onclick="openCertificate('images/certificates/ranaviru.jpg')">
 
-<a href="https://www.ranaviruit.lk" target="_blank">
+<i class="fa-solid fa-arrow-up-right-from-square cert-arrow"></i>
+
+<a href="https://www.ranaviruit.lk" target="_blank" onclick="event.stopPropagation()">
 <img src="images/ranaviru.png">
 </a>
 
@@ -904,6 +990,15 @@ Typing Master
 <p>Phone: +94 770 837 401</p>
 
 </section>
+<!-- CERTIFICATE MODAL -->
+
+<div class="cert-modal" id="certModal">
+<div class="cert-modal-content">
+<span class="cert-modal-close" id="certModalClose">&times;</span>
+<img id="certModalImg" src="" alt="Certificate">
+</div>
+</div>
+
 <footer>
 
 © 2026 Moditha Chethana Abeysinghe
@@ -918,6 +1013,33 @@ const navLinks=document.querySelector(".nav-links");
 menuToggle.onclick=()=>{
 navLinks.classList.toggle("active");
 }
+
+/* EDUCATION CERTIFICATE MODAL */
+
+const certModal = document.getElementById("certModal");
+const certModalImg = document.getElementById("certModalImg");
+const certModalClose = document.getElementById("certModalClose");
+
+function openCertificate(src){
+certModalImg.src = src;
+certModal.classList.add("active");
+}
+
+certModalClose.onclick = () => {
+certModal.classList.remove("active");
+};
+
+certModal.onclick = (e) => {
+if(e.target === certModal){
+certModal.classList.remove("active");
+}
+};
+
+document.addEventListener("keydown", (e) => {
+if(e.key === "Escape"){
+certModal.classList.remove("active");
+}
+});
 
 /* CONTACT FORM -> GOOGLE SHEET */
 
